@@ -1,21 +1,17 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { Product } from "@/types";
 import { useRouter } from "next/navigation";
-
-interface CartItem extends Product {
-  quantity: number;
-}
+import { useCart } from "@/contexts/CartContext";
 
 interface CartModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function Cart({ isOpen, onClose }: CartModalProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+export default function CartModal({ isOpen, onClose }: CartModalProps) {
+  const { cartItems, updateCart } = useCart();
   const modalRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -38,11 +34,6 @@ export default function Cart({ isOpen, onClose }: CartModalProps) {
     };
   }, [isOpen, onClose]);
 
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartItems(cart);
-  }, [isOpen]);
-
   const updateQuantity = (id: string, newQuantity: number) => {
     const updatedCart = cartItems
       .map((item) =>
@@ -50,8 +41,7 @@ export default function Cart({ isOpen, onClose }: CartModalProps) {
       )
       .filter((item) => item.quantity > 0);
 
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateCart(updatedCart);
   };
 
   const total = cartItems.reduce(
@@ -70,7 +60,7 @@ export default function Cart({ isOpen, onClose }: CartModalProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
       <div
         ref={modalRef}
-        className="bg-white w-full max-w-md h-full overflow-y-auto p-6"
+        className="bg-primary-light w-full max-w-md h-full overflow-y-auto p-6 text-text-primary"
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Your Cart</h2>
@@ -118,7 +108,7 @@ export default function Cart({ isOpen, onClose }: CartModalProps) {
               </div>
               <button
                 onClick={handleCheckout}
-                className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                className="w-full mt-4 bg-primary-dark text-text-primary py-2 px-4 rounded hover:bg-primary"
               >
                 Checkout
               </button>
