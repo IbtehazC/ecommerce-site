@@ -20,15 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <CartProvider>
-        <body className={inter.className}>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </body>
+      <body className={`${inter.className} bg-primary text-text-primary`}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
       </CartProvider>
     </html>
   );

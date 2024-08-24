@@ -1,12 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
-  onClick?: () => void;
-  children: React.ReactNode;
   className?: string;
-  disabled?: boolean;
+  children: React.ReactNode;
   fullWidth?: boolean;
 }
 
@@ -15,10 +13,12 @@ const Button: React.FC<ButtonProps> = ({
   onClick, 
   children, 
   className = '', 
+  type = 'button',
   disabled = false,
-  fullWidth = false
+  fullWidth = false,
+  ...rest
 }) => {
-  const baseClasses = 'px-4 py-2 bg-[#DCDEDC] text-black font-semibold transition-colors duration-300 hover:bg-opacity-80 rounded-sm';
+  const baseClasses = 'px-4 py-2 bg-[#DCDEDC] text-black font-semibold transition-colors duration-300 hover:bg-opacity-80';
   const widthClass = fullWidth ? 'w-full' : '';
   const classes = `${baseClasses} ${widthClass} ${className}`;
 
@@ -31,7 +31,13 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button onClick={onClick} className={classes} disabled={disabled}>
+    <button 
+      onClick={onClick} 
+      className={classes} 
+      disabled={disabled}
+      type={type}
+      {...rest}
+    >
       {children}
     </button>
   );

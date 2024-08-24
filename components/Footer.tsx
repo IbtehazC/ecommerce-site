@@ -1,9 +1,23 @@
-export default function Footer() {
-    return (
-      <footer className="bg-gray-800 text-white py-6">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center">&copy; 2024 Your Store. All rights reserved.</p>
-        </div>
-      </footer>
-    );
-  }
+import React from "react";
+import Link from "next/link";
+// import {
+//   FacebookIcon,
+//   TwitterIcon,
+//   InstagramIcon,
+//   LinkedInIcon
+// } from '@heroicons/react/24/outline';
+
+const Footer: React.FC = () => {
+  return (
+    <footer className="bg-card-bg text-text-primary p-8">
+      {/* Copyright */}
+      <div className="text-center text-text-secondary">
+        <p>
+          &copy; {new Date().getFullYear()} SaturnBytes. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

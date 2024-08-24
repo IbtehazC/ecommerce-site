@@ -1,10 +1,26 @@
+import { Timestamp } from "firebase/firestore";
+
+export interface Size {
+  label: string;
+  measurement: string;
+}
+
+export interface Color {
+  name: string;
+  hexCode: string;
+}
+
 export interface Product {
   id: string;
   name: string;
   description: string;
   price: number;
-  imageUrl: string;
+  images: string[];
   category: string;
+  sizes: Size[];
+  colors: Color[];
+  createdAt: Timestamp;
+  isFeatured: boolean;
 }
 
 export interface Category {

@@ -7,19 +7,19 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <Link
           href="/admin/products"
-          className="p-6 bg-white shadow rounded"
+          className="p-6 bg-primary-light shadow rounded"
         >
           Manage Products
         </Link>
         <Link
           href="/admin/categories"
-          className="p-6 bg-white shadow rounded"
+          className="p-6 bg-primary-light shadow rounded"
         >
           Manage Categories
         </Link>
         <Link
           href="/admin/hero"
-          className="p-6 bg-white shadow rounded"
+          className="p-6 bg-primary-light shadow rounded"
         >
           Update Hero Section
         </Link>
