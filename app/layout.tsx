@@ -20,11 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <CartProvider>
-      <body className={`${inter.className} bg-primary text-text-primary`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </body>
+        <body className={`${inter.className} bg-primary text-text-primary`}>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </body>
       </CartProvider>
     </html>
   );

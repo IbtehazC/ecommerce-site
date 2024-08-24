@@ -1,5 +1,3 @@
-import { Timestamp } from "firebase/firestore";
-
 export interface Size {
   label: string;
   measurement: string;
@@ -19,7 +17,7 @@ export interface Product {
   category: string;
   sizes: Size[];
   colors: Color[];
-  createdAt: Timestamp;
+  createdAt: string | null;
   isFeatured: boolean;
 }
 
