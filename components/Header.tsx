@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingCartIcon, MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import Cart from './Cart';
+import CartModal from './CartModal';
 import { useCart } from '@/contexts/CartContext';
 
 export default function Header() {
@@ -117,7 +117,7 @@ export default function Header() {
           </div>
         </div>
       )}
-      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 }
