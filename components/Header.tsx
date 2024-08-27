@@ -1,10 +1,15 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { ShoppingCartIcon, MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import CartModal from './CartModal';
-import { useCart } from '@/contexts/CartContext';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import {
+  ShoppingCartIcon,
+  MagnifyingGlassIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import CartModal from "./CartModal";
+import { useCart } from "@/contexts/CartContext";
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -12,23 +17,60 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cartItems } = useCart();
 
-  const cartItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const cartItemsCount = cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
 
   return (
-    <header className="bg-card-bg text-text-primary shadow-md relative z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-card-bg shadow-md" : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-24 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
+          <Link
+            href="/"
+            className="text-xl font-bold"
+          >
             Your Store
           </Link>
           <nav className="hidden md:flex space-x-4 items-center">
-            <Link href="/" className="text-text-primary hover:text-text-secondary transition duration-300">
+            <Link
+              href="/"
+              className="text-text-primary hover:text-text-secondary transition duration-300"
+            >
               Home
             </Link>
-            <Link href="/shop" className="text-text-primary hover:text-text-secondary transition duration-300">
+            <Link
+              href="/shop"
+              className="text-text-primary hover:text-text-secondary transition duration-300"
+            >
               Shop
             </Link>
-            <Link href="/about" className="text-text-primary hover:text-text-secondary transition duration-300">
+            <Link
+              href="/about"
+              className="text-text-primary hover:text-text-secondary transition duration-300"
+            >
               About
             </Link>
             <div className="relative">
@@ -49,8 +91,8 @@ export default function Header() {
                 </div>
               )}
             </div>
-            <button 
-              onClick={() => setIsCartOpen(true)} 
+            <button
+              onClick={() => setIsCartOpen(true)}
               className="relative text-text-primary hover:text-text-secondary focus:outline-none transition duration-300"
               aria-label="Shopping cart"
             >
@@ -81,13 +123,22 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-card-bg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300">
+            <Link
+              href="/"
+              className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
+            >
               Home
             </Link>
-            <Link href="/shop" className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300">
+            <Link
+              href="/shop"
+              className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
+            >
               Shop
             </Link>
-            <Link href="/about" className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300">
+            <Link
+              href="/about"
+              className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
+            >
               About
             </Link>
             <div className="relative px-3 py-2">
@@ -106,8 +157,8 @@ export default function Header() {
                 />
               )}
             </div>
-            <button 
-              onClick={() => setIsCartOpen(true)} 
+            <button
+              onClick={() => setIsCartOpen(true)}
               className="flex items-center px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
               aria-label="Shopping cart"
             >
@@ -117,7 +168,10 @@ export default function Header() {
           </div>
         </div>
       )}
-      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </header>
   );
 }

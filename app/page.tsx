@@ -23,11 +23,11 @@ export default async function Home() {
   const displayedCategories = allCategories.slice(0, 6);
 
   return (
-    <div className="bg-primary min-h-screen text-text-primary lg:mx-16">
+    <div className="bg-primary min-h-screen text-text-primary">
       <HeroSection />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto py-8">
         {/* Categories section */}
-        <div className="mb-12">
+        <div className="my-12">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-3xl font-bold">Categories</h2>
             <Link href="/categories" className="text-text-secondary hover:text-text-primary">
