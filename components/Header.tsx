@@ -52,7 +52,7 @@ export default function Header() {
             href="/"
             className="text-xl font-bold"
           >
-            Your Store
+            <img src="header-logo.png" alt="logo" width={160}/>
           </Link>
           <nav className="hidden md:flex space-x-4 items-center">
             <Link
