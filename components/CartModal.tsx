@@ -87,14 +87,14 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                 <div className="flex items-center">
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="px-2 py-1 bg-gray-200 rounded"
+                    className="px-2 py-1 bg-gray-600 rounded"
                   >
                     -
                   </button>
                   <span className="mx-2">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="px-2 py-1 bg-gray-200 rounded"
+                    className="px-2 py-1 bg-gray-600 rounded"
                   >
                     +
                   </button>
@@ -104,7 +104,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             <div className="mt-4 pt-4 border-t">
               <div className="flex justify-between items-center">
                 <span className="font-semibold">Total:</span>
-                <span className="font-bold">${total.toFixed(2)}</span>
+                <span className="font-semibold">BDT {total.toFixed(2)}</span>
               </div>
               <button
                 onClick={handleCheckout}

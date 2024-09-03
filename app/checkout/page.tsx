@@ -10,6 +10,12 @@ interface CartItem {
   quantity: number;
 }
 
+function generateTransactionId(): string {
+  const timestamp = Date.now().toString(36);
+  const randomStr = Math.random().toString(36).substr(2, 5);
+  return `TXN-${timestamp}-${randomStr}`.toUpperCase();
+}
+
 export default function CheckoutPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [total, setTotal] = useState(0);
@@ -35,11 +41,13 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const transactionId = generateTransactionId();
+
     // Prepare the data for SSLCommerz
     const data = {
       total_amount: total,
       currency: "BDT",
-      tran_id: "REF123", // You should generate a unique transaction ID
+      tran_id: transactionId, // You should generate a unique transaction ID
       success_url: "http://yoursite.com/success",
       fail_url: "http://yoursite.com/fail",
       cancel_url: "http://yoursite.com/cancel",
@@ -100,7 +108,7 @@ export default function CheckoutPage() {
           <div className="border-t pt-2 mt-4">
             <div className="flex justify-between items-center font-bold">
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>BDT {total.toFixed(2)}</span>
             </div>
           </div>
         </div>

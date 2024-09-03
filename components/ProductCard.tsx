@@ -14,15 +14,15 @@ export default function ProductCard({ product }: ProductCardProps) {
           <img
             src={product.images[0]}
             alt={product.name}
-            className="w-full h-48 object-cover mb-4"
+            className="w-full h-72 object-cover mb-4"
           />
 
           <h2 className="text-lg font-semibold text-text-primary hover:text-text-secondary transition duration-300 mb-2">
             {product.name}
           </h2>
 
-          <p className="text-text-secondary mb-2">
-            ${product.price.toFixed(2)}
+          <p className="text-text-secondary mb-2 ">
+            BDT {product.price.toFixed(2)}
           </p>
           <div className="mt-auto">
             <p className="text-text-secondary text-sm mb-1">
