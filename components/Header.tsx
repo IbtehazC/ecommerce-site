@@ -46,14 +46,17 @@ export default function Header() {
         isScrolled ? "bg-card-bg shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-24 py-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-24 py-4">
         <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-xl font-bold"
-          >
-            <img src="header-logo.png" alt="logo" width={160}/>
+          <Link href="/" className="text-xl font-bold">
+            <img 
+              src="header-logo.png" 
+              alt="logo" 
+              className="w-24 sm:w-32 md:w-40 h-auto"
+            />
           </Link>
+          
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-4 items-center">
             <Link
               href="/"
@@ -104,8 +107,21 @@ export default function Header() {
               )}
             </button>
           </nav>
+
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative text-text-primary hover:text-text-secondary focus:outline-none transition duration-300"
+              aria-label="Shopping cart"
+            >
+              <ShoppingCartIcon className="h-6 w-6" />
+              {cartItemsCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItemsCount}
+                </span>
+              )}
+            </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-text-primary hover:text-text-secondary focus:outline-none transition duration-300"
@@ -119,35 +135,40 @@ export default function Header() {
           </div>
         </div>
       </div>
+
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-card-bg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden bg-card-bg border-t border-gray-700">
+          <div className="px-4 pt-2 pb-3 space-y-1">
             <Link
               href="/"
               className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/shop"
               className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Shop
             </Link>
             <Link
               href="/about"
               className="block px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               About
             </Link>
-            <div className="relative px-3 py-2">
+            <div className="px-3 py-2">
               <button
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="text-text-primary hover:text-text-secondary focus:outline-none transition duration-300"
+                className="text-text-primary hover:text-text-secondary focus:outline-none transition duration-300 flex items-center"
                 aria-label="Search"
               >
-                <MagnifyingGlassIcon className="h-6 w-6" />
+                <MagnifyingGlassIcon className="h-6 w-6 mr-2" />
+                Search
               </button>
               {isSearchOpen && (
                 <input
@@ -157,14 +178,6 @@ export default function Header() {
                 />
               )}
             </div>
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="flex items-center px-3 py-2 rounded-md text-base font-medium text-text-primary hover:text-text-secondary hover:bg-primary transition duration-300"
-              aria-label="Shopping cart"
-            >
-              <ShoppingCartIcon className="h-6 w-6 mr-2" />
-              Cart {cartItemsCount > 0 && `(${cartItemsCount})`}
-            </button>
           </div>
         </div>
       )}

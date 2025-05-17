@@ -1,4 +1,5 @@
 "use client";
+
 import { collection, query, where, limit, getDocs } from "firebase/firestore";
 import Slider from "react-slick";
 import { db } from "@/lib/firebase";
@@ -35,7 +36,15 @@ export default function FeaturedProducts() {
     speed: 500,
     slidesToShow: 3.5,
     slidesToScroll: 1,
+    arrows: false,
     responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -44,27 +53,38 @@ export default function FeaturedProducts() {
         },
       },
       {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
         breakpoint: 600,
         settings: {
           slidesToShow: 1.5,
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.2,
+          slidesToScroll: 1,
+        }
+      }
     ],
   };
 
   return (
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-4 text-text-primary">
+    <div className="mb-8 sm:mb-12 px-4 sm:px-0">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 text-text-primary text-center sm:text-left">
         Featured Products
       </h2>
       <Slider {...settings}>
         {featuredProducts.map((product) => (
-          <div className="px-5">
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+          <div key={product.id} className="px-2 sm:px-3">
+            <ProductCard product={product} />
           </div>
         ))}
       </Slider>

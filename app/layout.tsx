@@ -22,7 +22,9 @@ export default function RootLayout({
       <CartProvider>
         <body className={`${inter.className} bg-primary text-text-primary`}>
           <Header />
-          <main className="flex-grow pt-16 px-24">{children}</main>
+          <main className="flex-grow pt-16 px-0 sm:px-4 md:px-8 lg:px-24">
+            {children}
+          </main>
           <Footer />
         </body>
       </CartProvider>

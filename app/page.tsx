@@ -1,7 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import Link from 'next/link';
-import CategoryCard from '@/components/CategoryCard';
+import CategorySlider from '@/components/CategorySlider';
 import HeroSection from '@/components/HeroSection';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import LatestProducts from '@/components/LatestProducts';
@@ -20,41 +20,30 @@ async function getCategories(): Promise<Category[]> {
 
 export default async function Home() {
   const allCategories = await getCategories();
-  const displayedCategories = allCategories.slice(0, 6);
 
   return (
     <div className="bg-primary min-h-screen text-text-primary">
       <HeroSection />
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-4 sm:py-8 px-4 sm:px-0">
         {/* Categories section */}
-        <div className="my-12">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-3xl font-bold">Categories</h2>
-            <Link href="/categories" className="text-text-secondary hover:text-text-primary">
-              Show All Categories
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            {displayedCategories.map(category => (
-              <CategoryCard key={category.id} category={category} />
-            ))}
-          </div>
+        <div className="my-8 sm:my-12">
+          <CategorySlider categories={allCategories} />
         </div>
 
         {/* Featured Products section */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <FeaturedProducts />
         </div>
 
         {/* Latest Products section */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <LatestProducts />
         </div>
 
         {/* Features section */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6">Why Choose Us</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="pb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center sm:text-left">Why Choose Us</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <FeatureCard 
               Icon={TruckIcon}
               title="Free Shipping"
